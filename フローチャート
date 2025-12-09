@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>縮毛エクステ工程フロー（分岐あり）</title>
+<style>
+  body { font-family: sans-serif; padding: 20px; }
+  .step { display: none; }
+  .active { display: block; }
+  button { padding: 12px 20px; margin-top: 20px; font-size: 18px; border-radius: 10px; }
+  .choice { margin-top: 15px; }
+</style>
+</head>
+<body>
+<h2>エクステ縮毛加工（ロートーン）フローチャート</h2>
+
+<!-- ① -->
+<div id="step1" class="step active">
+  <h3>① 流しシャンプー</h3>
+  <p>無添加石鹸タイプで滑りが残らないまで洗う</p>
+  <div class="choice">
+    <button onclick="next(1)">滑りが残る → ①を繰り返す</button>
+  </div>
+  <div class="choice">
+    <button onclick="next(2)">滑りなし → ②へ進む</button>
+  </div>
+</div>
+
+<!-- ② -->
+<div id="step2" class="step">
+  <h3>② 一剤塗布</h3>
+  <p>GOLD 5g + GMT 2g（5分放置）</p>
+  <button onclick="next(3)">次へ</button>
+</div>
+
+<!-- ③ -->
+<div id="step3" class="step">
+  <h3>③ 軟化チェック</h3>
+  <p>※このような状態は〈危険・やばい反応〉のサインです：</p>
+  <img src="data:image/webp;base64,{{IMAGE_BASE64}}" style="max-width:100%; border-radius:10px; margin:10px 0;" />
+  <div class="choice">
+    <button onclick="next(32)">まだ → 追加薬剤へ</button>
+  </div>
+  <div class="choice">
+    <button onclick="next(4)">OK → ④へ進む</button>
+  </div>
+</div>
+
+<!-- ③-2 追加薬剤 -->
+<div id="step32" class="step">
+  <h3>③-追加工程</h3>
+  <img src="data:image/webp;base64,iVBORw0KGgoAAAANSUhEUg=={{base64}}" style="max-width:100%;height:auto;" />
+  <p>ネオリシオN or クオライン80 を10分放置</p>
+  <p>それでも軟化しない場合 → ネオリシオH or クオライン130</p>
+  <button onclick="next(3)">軟化チェックに戻る</button>
+</div>
+
+<!-- ④ -->
+<div id="step4" class="step">
+  <h3>④ 流しシャンプー</h3>
+  <p>滑りが残らないまで洗う</p>
+  <div class="choice">
+    <button onclick="next(4)">滑りが残る → ④を繰り返す</button>
+  </div>
+  <div class="choice">
+    <button onclick="next(5)">滑りなし → ⑤へ進む</button>
+  </div>
+</div>
+
+<!-- ⑤ -->
+<div id="step5" class="step">
+  <h3>⑤ 乾かしてアイロン作業</h3>
+  <button onclick="next(6)">次へ</button>
+</div>
+
+<!-- ⑥ -->
+<div id="step6" class="step">
+  <h3>⑥ シャンプーボウルでオキシ6％</h3>
+  <p>お湯＋オキシ6％を白く濁るまで → 5分放置</p>
+  <button onclick="next(7)">次へ</button>
+</div>
+
+<!-- ⑦ -->
+<div id="step7" class="step">
+  <h3>⑦ 流しシャンプー</h3>
+  <p>滑りが残らないまで洗う</p>
+  <div class="choice">
+    <button onclick="next(7)">滑りが残る → ⑦を繰り返す</button>
+  </div>
+  <div class="choice">
+    <button onclick="next(8)">滑りなし → ⑧へ</button>
+  </div>
+</div>
+
+<!-- ⑧ -->
+<div id="step8" class="step">
+  <h3>⑧ ドライ仕上げ → アイロンフィニッシュ</h3>
+  <p>これで完成！</p>
+</div>
+
+<script>
+function next(num) {
+  const steps = document.querySelectorAll('.step');
+  steps.forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + num).classList.add('active');
+}
+</script>
+</body>
+</html>
